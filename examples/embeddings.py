@@ -1,7 +1,7 @@
 import daft
 
 from teraflopai_daft import attach_teraflopai_provider
-from teraflopai_daft.expressions import segment_text
+from teraflopai_daft.expressions import embed_text
 
 attach_teraflopai_provider()
 
@@ -14,5 +14,11 @@ df = daft.from_pydict(
     }
 )
 
-df = df.with_column("segments", segment_text(df["text"], model=None, provider="teraflopai"))
+df = df.with_column("embeddings", 
+    embed_text(
+        df["text"], 
+        model="concept-embedding-legal-nano", 
+        provider="teraflopai"
+    )
+)
 df.show()

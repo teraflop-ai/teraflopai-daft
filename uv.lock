@@ -197,14 +197,14 @@ wheels = [
 
 [[package]]
 name = "teraflopai"
-version = "0.1.12"
+version = "0.1.14"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "httpx", extra = ["http2"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f8/c6/45cd1235c801a0de56bb3272c8919bcce8c221cc0c3d1bee6ed6fa779e47/teraflopai-0.1.12.tar.gz", hash = "sha256:a54f0f47d5902b6ef39dec1a1e14fc12ee73b80d08aef8d20f354714dc84594c", size = 6988 }
+sdist = { url = "https://files.pythonhosted.org/packages/ab/7f/a2c7dfe7b4576716cea782ad66ca07755544d433b6a19b4fcb21e5a188fe/teraflopai-0.1.14.tar.gz", hash = "sha256:a90b4c762dc470ac5eda7fccd91d550808768801f4862670078447c063de7328", size = 7111 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/7d/82/98ff4d66dfb80fd27dcf08ababa45f595e67a829dacfaf4f6e86ceab9bad/teraflopai-0.1.12-py3-none-any.whl", hash = "sha256:365d52daefb2b246de0b316d0223700ec5d446dd62e61fe620142b5c9db44486", size = 7429 },
+    { url = "https://files.pythonhosted.org/packages/76/f3/e5d8d46b4212fabc6b86ea8725881666ae9e3f1669787d8faf46ff0b6ba7/teraflopai-0.1.14-py3-none-any.whl", hash = "sha256:ff2e2724a5f62488af3b1876e7b66fabb9d0e0360b4677761290074c7608eb82", size = 7556 },
 ]
 
 [[package]]

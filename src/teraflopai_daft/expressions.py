@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from typing import Any
 
-from daft.expressions import Expression
-from daft.datatype import DataType
-from daft.udf import udf
 from daft.ai.provider import Provider
+from daft.datatype import DataType
+from daft.expressions import Expression
 from daft.functions.ai import _resolve_provider
+from daft.udf import udf
 
 
 def segment_text(
@@ -29,6 +29,7 @@ def segment_text(
     expr = expr.with_init_args(descriptor)
     return expr(text)
 
+
 def search_text(
     query: Expression,
     *,
@@ -48,6 +49,35 @@ def search_text(
     expr = expr_udf(_SearchEngineExpression)
     expr = expr.with_init_args(descriptor)
     return expr(query)
+
+def embed_text(
+    text: Expression,
+    *,
+    provider: str | Provider | None = None,
+    model: str | None = None,
+    **options: Any,
+) -> Expression:
+    resolved_provider = _resolve_provider(provider, "teraflopai")
+    descriptor = resolved_provider.get_embeddings(model=model, **options)
+
+    expr_udf = udf(
+        return_dtype=DataType.list(DataType.float64()),
+        concurrency=1,
+        use_process=False,
+    )
+
+    expr = expr_udf(_TextEmbeddingExpression)
+    expr = expr.with_init_args(descriptor)
+    return expr(text)
+
+
+class _TextEmbeddingExpression:
+    def __init__(self, descriptor):
+        self.embedder = descriptor.instantiate()
+
+    def __call__(self, text_series):
+        values = text_series.to_pylist()
+        return self.embedder.embed_text(values) if values else []
 
 
 class _TextSegmenterExpression:

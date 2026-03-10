@@ -1,4 +1,5 @@
 import daft
+
 from teraflopai_daft import attach_teraflopai_provider
 from teraflopai_daft.expressions import search_text
 

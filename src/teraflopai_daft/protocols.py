@@ -4,15 +4,23 @@ from typing import Any, Protocol, runtime_checkable
 
 
 @runtime_checkable
+class TextEmbedding(Protocol):
+    def embed_text(self, text: list[str]) -> list[Any]: ...
+
+
+@runtime_checkable
 class TextSegmenter(Protocol):
-    def segment_text(self, text: list[str]) -> list[Any]:
-        ...
+    def segment_text(self, text: list[str]) -> list[Any]: ...
 
 
 @runtime_checkable
 class SearchEngine(Protocol):
-    def search_text(self, query: list[str]) -> list[Any]:
-        ...
+    def search_text(self, query: list[str]) -> list[Any]: ...
+
+
+class TextEmbeddingDescriptor:
+    def instantiate(self) -> TextEmbedding:
+        raise NotImplementedError
 
 
 class TextSegmenterDescriptor:
